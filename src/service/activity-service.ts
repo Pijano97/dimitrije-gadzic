@@ -69,21 +69,16 @@ export class ActivityService {
 
 
     private mapActivities(events: Events[]): any {
-        return events.map(event => {
-            console.log('Mapping event:', event); // Log the event being processed
-            const mappedEvent = {
-                contract_address: event.order.contract,
-                token_index: event.order.criteria.data.token.tokenId,
-                listing_price: event.order.price.amount.native,
-                maker: event.order.maker,
-                listing_from: event.order.validFrom,
-                listing_to: event.order.validUntil,
-                event_timestamp: event.event.createdAt
-            };
-            console.log('Mapped event:', mappedEvent); // Log the mapped event
-            return mappedEvent;
-        });
-    }
+        return events.map(event => ({
+            contract_address: event.order.contract,
+            token_index: event.order.criteria.data.token.tokenId,
+            listing_price: event.order.price.amount.native,
+            maker: event.order.maker,
+            listing_from: event.order.validFrom,
+            listing_to: event.order.validUntil,
+            event_timestamp: event.event.createdAt
 
+        }));
+    }
 
 }
